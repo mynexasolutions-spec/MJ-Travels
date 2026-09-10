@@ -60,8 +60,10 @@ function PhoneIcon() {
   return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.3 2.8 4.5 4.1c-.9.4-1.4 1.4-1.2 2.4 1.7 8.1 6.1 12.5 14.2 14.2 1 .2 2-.3 2.4-1.2l1.3-2.8-4.3-2.5-1.6 1.9c-3.1-1.4-5.9-4.2-7.3-7.3l1.9-1.6-2.6-4.4Z" /></svg>;
 }
 
-function MenuIcon() {
-  return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>;
+function MenuIcon({ open }: { open: boolean }) {
+  return open
+    ? <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg>
+    : <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>;
 }
 
 function ClockIcon() {
@@ -137,16 +139,25 @@ export default function Home() {
 
   return (
     <main id="top">
-      <header className="header">
+      <header className={menuOpen ? "header menu-active" : "header"}>
         <a className="brand" href="#top" aria-label="MJ Travels home" onClick={handleLogoClick}>
           <span className="brand-mj">MJ</span><span>TRAVELS</span>
           <small>Our Service is Our Business...</small>
         </a>
-        <nav className={menuOpen ? "nav nav-open" : "nav"} aria-label="Main navigation">
-          {navLinks.map((link) => <a href={link.href} key={link.label} onClick={() => setMenuOpen(false)}>{link.label}</a>)}
+        <nav id="main-navigation" className={menuOpen ? "nav nav-open" : "nav"} aria-label="Main navigation">
+          <div className="drawer-heading">
+            <div>
+              <small>Safe rides • 24/7 service</small>
+              <strong><span>MJ</span> TRAVELS</strong>
+              <p>Pune&apos;s trusted cab partner</p>
+            </div>
+            <button className="drawer-close" type="button" aria-label="Close navigation" onClick={() => setMenuOpen(false)}>&times;</button>
+          </div>
+          {navLinks.map((link) => <a className={link.label === "Home" ? "active" : undefined} href={link.href} key={link.label} onClick={() => setMenuOpen(false)}>{link.label}</a>)}
         </nav>
+        <button className={menuOpen ? "menu-backdrop menu-backdrop-open" : "menu-backdrop"} type="button" aria-label="Close navigation" onClick={() => setMenuOpen(false)} />
         <a className="top-call" href="tel:8888184051"><img className="call-icon" src="/icons/call.png" alt="" /><span>8888184051</span></a>
-        <button className="menu-button" aria-label="Toggle navigation" onClick={() => setMenuOpen(!menuOpen)}><MenuIcon /></button>
+        <button className="menu-button" type="button" aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)}><MenuIcon open={menuOpen} /></button>
       </header>
 
       <section className="hero">
@@ -169,8 +180,8 @@ export default function Home() {
           <a className="call-button" href="tel:8888184051"><PhoneIcon />Call 8888184051</a>
         </div>
 
-        <div className="rating" aria-label="Google rating 5 out of 5">
-          <div><img className="google-logo" src="/icons/google.png" alt="Google" /><span className="stars">★★★★★</span><strong>5.0 (Most Trustable)</strong></div>
+          <div className="rating" aria-label="Google rating 5 out of 5">
+          <div><img className="google-logo" src="/icons/google.png" alt="Google" /><div className="rating-score"><span className="stars">★★★★★</span><strong>5.0 (Most Trustable)</strong></div></div>
           <p>Hundreds of happy travellers</p>
         </div>
       </section>

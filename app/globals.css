@@ -802,3 +802,36 @@ img, iframe { max-width: 100%; }
   .drawer-heading,
   .menu-backdrop { display: none; }
 }
+
+@media (max-width: 760px) {
+  .hero { min-height: 0; padding-top: 72px; padding-bottom: 30px; }
+  .content { padding-top: 36px; }
+  .header { background: linear-gradient(180deg, rgba(3, 30, 32, .76), rgba(2, 20, 22, .42)); border-color: rgba(180, 241, 227, .3); box-shadow: 0 10px 24px rgba(0, 0, 0, .2); backdrop-filter: blur(12px); }
+  .header .brand { background: rgba(1, 15, 17, .26); }
+  .header .menu-button { border-color: rgba(255, 255, 255, .22); background: rgba(255, 255, 255, .14); }
+
+  .nav { z-index: 2147483647; }
+  .menu-backdrop-open { z-index: 2147483646; }
+  .drawer-close { width: 42px; height: 42px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%; background: #073f3f; color: #ffe17a; font: inherit; font-size: 28px; font-weight: 400; line-height: 1; cursor: pointer; box-shadow: 0 4px 10px rgba(0, 0, 0, .22); transition: transform .16s ease, background .16s ease; }
+  .drawer-close:hover, .drawer-close:active { background: #0b5553; transform: rotate(90deg); }
+
+  .fleet-view-all { display: none; }
+
+  .rating > div { flex-wrap: nowrap; align-items: center; gap: 10px; }
+  .rating .google-logo { width: 96px; flex: 0 0 96px; }
+  .rating-score { min-width: 0; display: grid; gap: 4px; }
+  .rating .stars { font-size: 18px; line-height: 1; white-space: nowrap; }
+  .rating strong { font-size: 12px; line-height: 1.15; white-space: nowrap; }
+  .rating p { margin: 10px 0 0; }
+
+  .routes-intro { align-items: center; }
+  .routes-intro p { flex: 0 1 142px; margin: 0; }
+}
+
+@media (max-width: 360px) {
+  .rating > div { gap: 7px; }
+  .rating .google-logo { width: 88px; flex-basis: 88px; }
+  .rating .stars { font-size: 16px; }
+  .rating strong { font-size: 11px; }
+  .routes-intro p { flex-basis: 132px; font-size: 12px; }
+}
