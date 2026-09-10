@@ -11,28 +11,46 @@ const navigation = [
   { label: "Contact", href: "/contact" },
 ];
 
-function MenuIcon() {
-  return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>;
+function MenuIcon({ open }: { open: boolean }) {
+  return open
+    ? <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg>
+    : <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>;
 }
 
 export function SiteHeader({ active }: { active: string }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="header page-header">
+    <header className={menuOpen ? "header page-header menu-active" : "header page-header"}>
       <a className="brand" href="/" aria-label="MJ Travels home" onClick={() => setMenuOpen(false)}>
         <span className="brand-mj">MJ</span><span>TRAVELS</span>
         <small>Our Service is Our Business...</small>
       </a>
-      <nav className={menuOpen ? "nav nav-open" : "nav"} aria-label="Main navigation">
+      <nav id="main-navigation" className={menuOpen ? "nav nav-open" : "nav"} aria-label="Main navigation">
+        <div className="drawer-heading">
+          <div>
+            <small>Safe rides • 24/7 service</small>
+            <strong><span>MJ</span> TRAVELS</strong>
+            <p>Pune&apos;s trusted cab partner</p>
+          </div>
+          <b aria-hidden="true">✦</b>
+        </div>
         {navigation.map((link) => (
           <a className={link.label === active ? "active" : undefined} href={link.href} key={link.label} onClick={() => setMenuOpen(false)}>
             {link.label}
           </a>
         ))}
       </nav>
+      <button className={menuOpen ? "menu-backdrop menu-backdrop-open" : "menu-backdrop"} type="button" aria-label="Close navigation" onClick={() => setMenuOpen(false)} />
       <a className="top-call" href="tel:8888184051"><img className="call-icon" src="/icons/call.png" alt="" /><span>8888184051</span></a>
-      <button className="menu-button" aria-label="Toggle navigation" onClick={() => setMenuOpen(!menuOpen)}><MenuIcon /></button>
+      <button
+        className="menu-button"
+        type="button"
+        aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+        aria-expanded={menuOpen}
+        aria-controls="main-navigation"
+        onClick={() => setMenuOpen(!menuOpen)}
+      ><MenuIcon open={menuOpen} /></button>
     </header>
   );
 }
