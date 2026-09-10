@@ -3,13 +3,12 @@
 import { useState } from "react";
 
 const navLinks = [
-  { label: "Home", href: "/#home" },
-  { label: "Services", href: "/#services" },
-  { label: "Routes", href: "/#routes" },
+  { label: "Home", href: "/" },
   { label: "Gallery", href: "/gallery" },
-  { label: "About", href: "/#about" },
-  { label: "Reviews", href: "/#reviews" },
-  { label: "Contact", href: "/#contact" },
+  { label: "About", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Reviews", href: "/reviews" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const galleryImages = [

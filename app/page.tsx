@@ -3,13 +3,12 @@
 import { type FormEvent, useState } from "react";
 
 const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "Services", href: "#services" },
-  { label: "Routes", href: "#routes" },
+  { label: "Home", href: "/" },
   { label: "Gallery", href: "/gallery" },
-  { label: "About", href: "#about" },
-  { label: "Reviews", href: "#reviews" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Reviews", href: "/reviews" },
+  { label: "Contact", href: "/contact" },
 ];
 const serviceTiles = [
   { label: <>Airport<br />Transfers</>, icon: "plane" },
@@ -413,12 +412,12 @@ export default function Home() {
 
           <div className="footer-column">
             <h2>Quick Links</h2>
-            <a href="#home">Home</a><a href="#services">Services</a><a href="/gallery">Gallery</a><a href="#routes">Popular Routes</a><a href="#about">About Us</a><a href="#reviews">Reviews</a><a href="#contact">Contact</a>
+            <a href="/">Home</a><a href="/services">Services</a><a href="/gallery">Gallery</a><a href="/#routes">Popular Routes</a><a href="/about">About Us</a><a href="/reviews">Reviews</a><a href="/contact">Contact</a>
           </div>
 
           <div className="footer-column">
             <h2>Our Services</h2>
-            <a href="#services">Airport Transfers</a><a href="#services">Local Cabs</a><a href="#services">Outstation Trips</a><a href="#services">One Way Drop</a><a href="#services">Round Trip</a><a href="#services">Corporate Travel</a><a href="#services">Family Trips</a>
+            <a href="/services#airport">Airport Transfers</a><a href="/services#local">Local Cabs</a><a href="/services#outstation">Outstation Trips</a><a href="/services#outstation">One Way Drop</a><a href="/services#outstation">Round Trip</a><a href="/services#corporate">Corporate Travel</a><a href="/services#corporate">Family Trips</a>
           </div>
 
           <div className="footer-column footer-social">
