@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 const navigation = [
   { label: "Home", href: "/" },
@@ -22,10 +23,10 @@ export function SiteHeader({ active }: { active: string }) {
 
   return (
     <header className={menuOpen ? "header page-header menu-active" : "header page-header"}>
-      <a className="brand" href="/" aria-label="MJ Travels home" onClick={() => setMenuOpen(false)}>
+      <Link className="brand" href="/" aria-label="MJ Travels home" onClick={() => setMenuOpen(false)}>
         <span className="brand-mj">MJ</span><span>TRAVELS</span>
         <small>Our Service is Our Business...</small>
-      </a>
+      </Link>
       <nav id="main-navigation" className={menuOpen ? "nav nav-open" : "nav"} aria-label="Main navigation">
         <div className="drawer-heading">
           <div>
@@ -33,13 +34,14 @@ export function SiteHeader({ active }: { active: string }) {
             <strong><span>MJ</span> TRAVELS</strong>
             <p>Pune&apos;s trusted cab partner</p>
           </div>
-          <b aria-hidden="true">✦</b>
+          <button className="drawer-close" type="button" aria-label="Close navigation" onClick={() => setMenuOpen(false)}>&times;</button>
         </div>
         {navigation.map((link) => (
-          <a className={link.label === active ? "active" : undefined} href={link.href} key={link.label} onClick={() => setMenuOpen(false)}>
+          <Link className={link.label === active ? "active" : undefined} href={link.href} key={link.label} onClick={() => setMenuOpen(false)}>
             {link.label}
-          </a>
+          </Link>
         ))}
+        <Link className="drawer-book" href="/book" onClick={() => setMenuOpen(false)}>Book a cab</Link>
       </nav>
       <button className={menuOpen ? "menu-backdrop menu-backdrop-open" : "menu-backdrop"} type="button" aria-label="Close navigation" onClick={() => setMenuOpen(false)} />
       <a className="top-call" href="tel:8888184051"><img className="call-icon" src="/icons/call.png" alt="" /><span>8888184051</span></a>

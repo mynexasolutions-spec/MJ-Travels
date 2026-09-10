@@ -1,6 +1,7 @@
 "use client";
 
 import { type FormEvent, useState } from "react";
+import Link from "next/link";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -153,7 +154,8 @@ export default function Home() {
             </div>
             <button className="drawer-close" type="button" aria-label="Close navigation" onClick={() => setMenuOpen(false)}>&times;</button>
           </div>
-          {navLinks.map((link) => <a className={link.label === "Home" ? "active" : undefined} href={link.href} key={link.label} onClick={() => setMenuOpen(false)}>{link.label}</a>)}
+          {navLinks.map((link) => <Link className={link.label === "Home" ? "active" : undefined} href={link.href} key={link.label} onClick={() => setMenuOpen(false)}>{link.label}</Link>)}
+          <Link className="drawer-book" href="/book" onClick={() => setMenuOpen(false)}>Book a cab</Link>
         </nav>
         <button className={menuOpen ? "menu-backdrop menu-backdrop-open" : "menu-backdrop"} type="button" aria-label="Close navigation" onClick={() => setMenuOpen(false)} />
         <a className="top-call" href="tel:8888184051"><img className="call-icon" src="/icons/call.png" alt="" /><span>8888184051</span></a>
@@ -176,7 +178,7 @@ export default function Home() {
         </div>
 
         <div className="actions">
-          <a className="book-button" href="#contact">Book Your Cab</a>
+          <Link className="book-button" href="/book">Book Your Cab</Link>
           <a className="call-button" href="tel:8888184051"><PhoneIcon />Call 8888184051</a>
         </div>
 
@@ -192,10 +194,10 @@ export default function Home() {
         <div className="service-shell">
           <div className="service-tiles">
             {serviceTiles.map((tile) => (
-              <a href="#contact" className="service-tile" key={tile.icon}>
+              <Link href="/book" className="service-tile" key={tile.icon}>
                 {tile.icon === "plane" ? <img className="airport-transfer-icon" src="/icons/airplane.png" alt="" /> : <ServiceGlyph name={tile.icon} />}
                 <span>{tile.label}</span>
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -210,7 +212,7 @@ export default function Home() {
                 <li>Flight Tracking</li>
                 <li>Doorstep Pickup</li>
               </ul>
-              <a className="airport-book" href="#contact">Book Airport Cab</a>
+              <Link className="airport-book" href="/book">Book Airport Cab</Link>
               <p className="journey-note">Start<br />Your Journey<br />Stress Free</p>
             </div>
             <div className="airport-photo" role="img" aria-label="MJ Travels cab heading toward Mumbai Airport" />
@@ -244,7 +246,7 @@ export default function Home() {
                 <h3>{vehicle.name}</h3>
                 <p className="fleet-seats">({vehicle.seats})</p>
                 <p className="fleet-features">{vehicle.features}</p>
-                <a className="fleet-book" href="#contact">Book Now</a>
+                <Link className="fleet-book" href="/book">Book Now</Link>
               </article>
             ))}
           </div>

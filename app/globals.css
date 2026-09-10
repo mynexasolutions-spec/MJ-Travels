@@ -758,7 +758,10 @@ img, iframe { max-width: 100%; }
   .nav a.active::before, .nav a:hover::before { background: #ffd557; transform: scale(1.15); box-shadow: 0 0 0 4px rgba(255, 213, 87, .14); }
   .nav a:hover { transform: translateX(-3px); border-color: rgba(100, 230, 192, .55); background: rgba(100, 230, 192, .12); color: #fff; }
   .nav a:active { transform: scale(.97); }
-  .nav::after { content: "Book a cab  →"; min-height: 50px; display: flex; align-items: center; justify-content: center; margin-top: auto; border: 1px solid rgba(255, 225, 122, .7); border-radius: 14px; background: linear-gradient(110deg, #f4c743, #ffe179); color: #102021; font-size: 13px; font-weight: 900; box-shadow: 0 8px 18px rgba(0, 0, 0, .22); }
+  .nav::after { content: none; }
+  .nav .drawer-book { min-height: 46px; display: inline-flex; align-items: center; justify-content: center; margin: auto 0 0; padding: 0 12px; border: 1px solid rgba(255, 225, 122, .7); border-radius: 14px; background: linear-gradient(110deg, #f4c743, #ffe179); color: #102021; font-size: 12px; font-weight: 700; letter-spacing: .1px; text-align: center; }
+  .nav .drawer-book::before { display: none; }
+  .nav .drawer-book:hover { padding-left: 12px; border-color: rgba(255, 225, 122, .9); background: linear-gradient(110deg, #f8d25b, #ffe58c); color: #102021; transform: translateY(-2px); }
   .menu-backdrop { display: none; }
   .menu-backdrop-open { position: fixed; z-index: 1; inset: 0; display: block; width: 100%; height: 100dvh; padding: 0; border: 0; background: rgba(0, 8, 10, .58); cursor: pointer; }
   .footer-main { width: calc(100% - 36px); min-height: 0; grid-template-columns: 1fr 1fr; gap: 22px 16px; padding: 28px 0 22px; }
@@ -800,6 +803,8 @@ img, iframe { max-width: 100%; }
 
 @media (min-width: 761px) {
   .drawer-heading,
+  .drawer-close,
+  .drawer-book,
   .menu-backdrop { display: none; }
 }
 
@@ -835,3 +840,13 @@ img, iframe { max-width: 100%; }
   .rating strong { font-size: 11px; }
   .routes-intro p { flex-basis: 132px; font-size: 12px; }
 }
+
+/* Dedicated booking page */
+.book-page { min-height: 100vh; background: #f4f6f1; color: #0a1b1d; }
+.book-page-hero { min-height: 690px; padding: 150px 28px 78px; color: #fff; background: linear-gradient(90deg, rgba(2, 21, 23, .94), rgba(2, 27, 28, .68)), url("/images/your-image-4.jpg") center / cover no-repeat; }
+.book-page-shell { width: min(1120px, 100%); display: grid; grid-template-columns: 1fr minmax(360px, .84fr); align-items: center; gap: clamp(46px, 9vw, 110px); margin: 0 auto; }
+.book-page-copy h1 { max-width: 540px; font-size: clamp(48px, 5.6vw, 76px); }.book-page-copy > p:not(.page-kicker) { max-width: 510px; margin: 18px 0 0; color: rgba(255, 255, 255, .85); font-size: 17px; line-height: 1.55; font-weight: 600; }
+.book-page-highlights { display: grid; gap: 9px; margin-top: 29px; color: #fff2b2; font-size: 13px; font-weight: 800; }.book-page-highlights span::before { content: "•"; margin-right: 8px; color: var(--gold); }
+.book-page-form { display: grid; gap: 14px; padding: 30px; border: 1px solid rgba(255, 255, 255, .22); border-radius: 22px; background: rgba(255, 255, 255, .96); color: #1c3032; box-shadow: 0 18px 42px rgba(0, 0, 0, .25); }.book-page-form h2 { margin: 0 0 4px; font-family: Georgia, "Times New Roman", serif; font-size: 32px; line-height: 1; }.book-page-form label { display: grid; gap: 7px; color: #526264; font-size: 12px; font-weight: 800; }.book-page-form input { width: 100%; height: 48px; padding: 0 13px; border: 1px solid #d5dfda; border-radius: 9px; outline-color: #0b625c; color: #193033; font: inherit; font-size: 14px; font-weight: 600; }.book-page-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }.book-page-form button { min-height: 50px; border: 0; border-radius: 10px; background: linear-gradient(110deg, #f5c94f, #ffe17b); color: #142016; font: inherit; font-size: 14px; font-weight: 900; cursor: pointer; }
+@media (max-width: 760px) { .book-page-hero { min-height: 0; padding: 78px 18px 32px; }.book-page-shell { grid-template-columns: 1fr; gap: 12px; }.book-page-copy .page-kicker { margin-bottom: 6px; }.book-page-copy h1 { margin: 0; font-size: clamp(36px, 11vw, 48px); }.book-page-form { padding: 22px 18px; border-radius: 18px; }.book-page-form h2 { font-size: 28px; } }
+@media (max-width: 380px) { .book-page-form-row { grid-template-columns: 1fr; } }
