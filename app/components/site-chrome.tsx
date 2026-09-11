@@ -41,7 +41,7 @@ export function SiteHeader({ active }: { active: string }) {
             {link.label}
           </Link>
         ))}
-        <Link className="drawer-book" href="/book" onClick={() => setMenuOpen(false)}>Book a cab</Link>
+        <Link className="drawer-book" href="/book" onClick={() => setMenuOpen(false)}>Book a Cab</Link>
       </nav>
       <button className={menuOpen ? "menu-backdrop menu-backdrop-open" : "menu-backdrop"} type="button" aria-label="Close navigation" onClick={() => setMenuOpen(false)} />
       <a className="top-call" href="tel:8888184051"><img className="call-icon" src="/icons/call.png" alt="" /><span>8888184051</span></a>

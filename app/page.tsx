@@ -155,7 +155,7 @@ export default function Home() {
             <button className="drawer-close" type="button" aria-label="Close navigation" onClick={() => setMenuOpen(false)}>&times;</button>
           </div>
           {navLinks.map((link) => <Link className={link.label === "Home" ? "active" : undefined} href={link.href} key={link.label} onClick={() => setMenuOpen(false)}>{link.label}</Link>)}
-          <Link className="drawer-book" href="/book" onClick={() => setMenuOpen(false)}>Book a cab</Link>
+          <Link className="drawer-book" href="/book" onClick={() => setMenuOpen(false)}>Book a Cab</Link>
         </nav>
         <button className={menuOpen ? "menu-backdrop menu-backdrop-open" : "menu-backdrop"} type="button" aria-label="Close navigation" onClick={() => setMenuOpen(false)} />
         <a className="top-call" href="tel:8888184051"><img className="call-icon" src="/icons/call.png" alt="" /><span>8888184051</span></a>
