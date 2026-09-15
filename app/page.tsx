@@ -8,7 +8,6 @@ const navLinks = [
   { label: "Gallery", href: "/gallery" },
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
-  { label: "Reviews", href: "/reviews" },
   { label: "Contact", href: "/contact" },
 ];
 const serviceTiles = [
@@ -31,10 +30,10 @@ const trustFeatures = [
 ];
 
 const fleet = [
-  { name: "Sedan", seats: "4 Seater", image: "/images/your-image-0.jpg", features: "AC • Comfortable • Ideal for City & Airport" },
-  { name: "SUV", seats: "6/7 Seater", image: "/images/your-image-11.jpg", features: "Spacious • Family Friendly • Outstation Ready" },
-  { name: "Premium Cars", seats: "Luxury Travel", image: "/images/your-image-12.jpg", features: "Luxury • Extra Comfort • For Special Occasions" },
-  { name: "Tempo Traveller", seats: "9/12 Seater", image: "/images/your-image-13.jpg", features: "Group Travel • Comfortable • Best for Outstation" },
+  { name: "Sedan", subtitle: "Dzire or Similar", image: "/images/your-image-0.jpg", included: "4 hrs | 40 kms", fuel: "CNG", price: "₹1450" },
+  { name: "SUV", subtitle: "Innova or Similar", image: "/images/your-image-11.jpg", included: "8 hrs | 80 kms", fuel: "Diesel", price: "₹2250" },
+  { name: "Premium SUV", subtitle: "Premium or Similar", image: "/images/your-image-12.jpg", included: "8 hrs | 80 kms", fuel: "Diesel", price: "₹3200" },
+  { name: "Tempo Traveller", subtitle: "12 Seater or Similar", image: "/images/your-image-13.jpg", included: "8 hrs | 80 kms", fuel: "Diesel", price: "₹3800" },
 ];
 
 const popularRoutes = [
@@ -87,6 +86,17 @@ function BookingIcon({ type }: { type: "location" | "calendar" | "time" }) {
   };
 
   return <svg viewBox="0 0 24 24" aria-hidden="true">{paths[type]}</svg>;
+}
+
+function FleetDetailIcon({ type }: { type: "included" | "fuel" | "cancellation" | "payment" }) {
+  const icons = {
+    included: <><circle cx="12" cy="12" r="8.5" /><path d="M12 7v5l3.5 2M5.5 5.5 4 4M18.5 5.5 20 4" /></>,
+    fuel: <><path d="M5 21V4h9v17H5Zm3-12h3M14 9h2l2 2.5V18c0 .8.7 1.5 1.5 1.5S21 18.8 21 18v-7.2L18.2 8H14" /><path d="M8 21v-5h3v5" /></>,
+    cancellation: <><path d="M12 3 19 6v5c0 4.6-2.9 8-7 10-4.1-2-7-5.4-7-10V6l7-3Z" /><path d="m8.7 12 2.1 2.1 4.6-4.6" /></>,
+    payment: <><circle cx="16" cy="7" r="3.5" /><path d="M16 5v4M14 7h4M4 18.5c1.8-3.7 4.2-5.5 7.2-5.5 1.9 0 2.7 1.1 4.8 1.1H19c1.1 0 1.8.8 1.8 1.7 0 1-.7 1.7-1.8 1.7h-4.2l-2.3 2.2c-1.4 1.4-3.2 1.7-5 1l-4.2-1.6" /></>,
+  };
+
+  return <svg viewBox="0 0 24 24" aria-hidden="true">{icons[type]}</svg>;
 }
 
 function ServiceGlyph({ name }: { name: string }) {
@@ -142,11 +152,11 @@ export default function Home() {
     <main id="top">
       <header className={menuOpen ? "header menu-active" : "header"}>
         <a className="brand" href="#top" aria-label="MJ Travels home" onClick={handleLogoClick}>
-          <span className="brand-mj">MJ</span><span>TRAVELS</span>
-          <small>Our Service is Our Business...</small>
+          <img src="/logo.png" alt="MJ Travels" className="logo-img" />
         </a>
         <nav id="main-navigation" className={menuOpen ? "nav nav-open" : "nav"} aria-label="Main navigation">
           <div className="drawer-heading">
+            <img src="/logo.png" alt="MJ Travels" />
             <div>
               <small>Safe rides • 24/7 service</small>
               <strong><span>MJ</span> TRAVELS</strong>
@@ -157,6 +167,7 @@ export default function Home() {
           {navLinks.map((link) => <Link className={link.label === "Home" ? "active" : undefined} href={link.href} key={link.label} onClick={() => setMenuOpen(false)}>{link.label}</Link>)}
           <Link className="drawer-book" href="/book" onClick={() => setMenuOpen(false)}>Book a Cab</Link>
         </nav>
+        <Link className="header-book" href="/book">Book a Cab</Link>
         <button className={menuOpen ? "menu-backdrop menu-backdrop-open" : "menu-backdrop"} type="button" aria-label="Close navigation" onClick={() => setMenuOpen(false)} />
         <a className="top-call" href="tel:8888184051"><img className="call-icon" src="/icons/call.png" alt="" /><span>8888184051</span></a>
         <button className="menu-button" type="button" aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)}><MenuIcon open={menuOpen} /></button>
@@ -241,12 +252,18 @@ export default function Home() {
             {fleet.map((vehicle) => (
               <article className="fleet-card" key={vehicle.name}>
                 <div className="fleet-image-wrap">
-                  <img src={vehicle.image} alt={vehicle.name} />
+                  <img src={vehicle.image} alt={vehicle.name} loading="lazy" decoding="async" />
                 </div>
-                <h3>{vehicle.name}</h3>
-                <p className="fleet-seats">({vehicle.seats})</p>
-                <p className="fleet-features">{vehicle.features}</p>
-                <Link className="fleet-book" href="/book">Book Now</Link>
+                <div className="fleet-card-content">
+                  <div className="fleet-title"><h3>{vehicle.name}</h3><span>{vehicle.subtitle}</span></div>
+                  <div className="fleet-details">
+                    <div className="fleet-detail"><img className="fleet-detail-icon" src="/time-management.png" alt="" /><p><span>Included</span><strong>{vehicle.included}</strong></p></div>
+                    <div className="fleet-detail fleet-cancellation"><FleetDetailIcon type="cancellation" /><p><span>Cancellation</span><strong>Free up to 1 hr</strong></p></div>
+                    <div className="fleet-detail"><img className="fleet-detail-icon" src="/gas-station.png" alt="" /><p><span>Fuel type</span><strong>{vehicle.fuel}</strong></p></div>
+                    <div className="fleet-detail"><img className="fleet-detail-icon" src="/payment-method.png" alt="" /><p><span>Part payment</span><strong>Pay 20% now</strong></p></div>
+                  </div>
+                  <div className="fleet-card-footer"><p><strong>{vehicle.price}</strong><span>+ Taxes &amp; Charges</span></p><Link className="fleet-book" href="/book">Book Now</Link></div>
+                </div>
               </article>
             ))}
           </div>
@@ -417,8 +434,7 @@ export default function Home() {
         <div className="footer-main">
           <div className="footer-brand-block">
             <a className="brand footer-brand" href="#home" aria-label="MJ Travels home">
-              <span className="brand-mj">MJ</span><span>TRAVELS</span>
-              <small>Our Service is Our Business...</small>
+              <img src="/logo.png" alt="MJ Travels" className="logo-img" />
             </a>
             <p>Safe Rides. Happy Journeys. Always With You.</p>
           </div>

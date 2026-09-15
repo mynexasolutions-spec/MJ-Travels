@@ -8,7 +8,6 @@ const navigation = [
   { label: "Gallery", href: "/gallery" },
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
-  { label: "Reviews", href: "/reviews" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -24,11 +23,11 @@ export function SiteHeader({ active }: { active: string }) {
   return (
     <header className={menuOpen ? "header page-header menu-active" : "header page-header"}>
       <Link className="brand" href="/" aria-label="MJ Travels home" onClick={() => setMenuOpen(false)}>
-        <span className="brand-mj">MJ</span><span>TRAVELS</span>
-        <small>Our Service is Our Business...</small>
+        <img src="/logo.png" alt="MJ Travels" className="logo-img" />
       </Link>
       <nav id="main-navigation" className={menuOpen ? "nav nav-open" : "nav"} aria-label="Main navigation">
         <div className="drawer-heading">
+          <img src="/logo.png" alt="MJ Travels" />
           <div>
             <small>Safe rides • 24/7 service</small>
             <strong><span>MJ</span> TRAVELS</strong>
@@ -43,6 +42,7 @@ export function SiteHeader({ active }: { active: string }) {
         ))}
         <Link className="drawer-book" href="/book" onClick={() => setMenuOpen(false)}>Book a Cab</Link>
       </nav>
+      <Link className="header-book" href="/book">Book a Cab</Link>
       <button className={menuOpen ? "menu-backdrop menu-backdrop-open" : "menu-backdrop"} type="button" aria-label="Close navigation" onClick={() => setMenuOpen(false)} />
       <a className="top-call" href="tel:8888184051"><img className="call-icon" src="/icons/call.png" alt="" /><span>8888184051</span></a>
       <button
@@ -63,8 +63,7 @@ export function SiteFooter() {
       <div className="footer-main">
         <div className="footer-brand-block">
           <a className="brand footer-brand" href="/" aria-label="MJ Travels home">
-            <span className="brand-mj">MJ</span><span>TRAVELS</span>
-            <small>Our Service is Our Business...</small>
+            <img src="/logo.png" alt="MJ Travels" className="logo-img" />
           </a>
           <p>Safe rides. Happy journeys. Always with you.</p>
         </div>

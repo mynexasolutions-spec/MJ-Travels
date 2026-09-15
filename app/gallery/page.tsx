@@ -1,6 +1,6 @@
 "use client";
 
-import { SiteHeader } from "../components/site-chrome";
+import { SiteFooter, SiteHeader } from "../components/site-chrome";
 import Link from "next/link";
 
 const galleryImages = [
@@ -44,6 +44,7 @@ export default function GalleryPage() {
           ))}
         </div>
       </section>
+      <SiteFooter />
     </main>
   );
 }
