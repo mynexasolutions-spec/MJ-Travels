@@ -1,6 +1,6 @@
 "use client";
 
-import { type FormEvent, useState } from "react";
+import { type CSSProperties, type FormEvent, useEffect, useState } from "react";
 import Link from "next/link";
 
 const navLinks = [
@@ -37,11 +37,11 @@ const fleet = [
 ];
 
 const popularRoutes = [
-  { route: "Pune →|Mumbai Airport", image: "/images/your-image-3.jpg" },
-  { route: "Pune →|Lonavala", image: "/images/your-image-4.jpg" },
-  { route: "Pune →|Mahabaleshwar", image: "/images/your-image-6.jpg" },
-  { route: "Pune →|Shirdi", image: "/images/your-image-7.jpg" },
-  { route: "Pune →|Nashik", image: "/images/your-image-8.jpg" },
+  { route: "Pune|Mumbai Airport", image: "/images/your-image-3.jpg" },
+  { route: "Pune|Lonavala", image: "/images/your-image-4.jpg" },
+  { route: "Pune|Mahabaleshwar", image: "/images/your-image-6.jpg" },
+  { route: "Pune|Shirdi", image: "/images/your-image-7.jpg" },
+  { route: "Pune|Nashik", image: "/images/your-image-8.jpg" },
 ];
 
 const customerReviews = [
@@ -121,6 +121,8 @@ function ServiceGlyph({ name }: { name: string }) {
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [booking, setBooking] = useState({
     from: "",
     to: "",
@@ -148,9 +150,25 @@ export default function Home() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  useEffect(() => {
+    const updateScrollState = () => {
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      setIsScrolled(window.scrollY > 24);
+      setScrollProgress(maxScroll > 0 ? (window.scrollY / maxScroll) * 100 : 0);
+    };
+
+    updateScrollState();
+    window.addEventListener("scroll", updateScrollState, { passive: true });
+    return () => window.removeEventListener("scroll", updateScrollState);
+  }, []);
+
+  const headerClassName = ["header", menuOpen && "menu-active", isScrolled && "header-scrolled"]
+    .filter(Boolean)
+    .join(" ");
+
   return (
     <main id="top">
-      <header className={menuOpen ? "header menu-active" : "header"}>
+      <header className={headerClassName} style={{ "--scroll-progress": `${scrollProgress}%` } as CSSProperties}>
         <a className="brand" href="#top" aria-label="MJ Travels home" onClick={handleLogoClick}>
           <img src="/logo.png" alt="MJ Travels" className="logo-img" />
         </a>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { type CSSProperties, useEffect, useState } from "react";
 import Link from "next/link";
 
 const navigation = [
@@ -19,9 +19,27 @@ function MenuIcon({ open }: { open: boolean }) {
 
 export function SiteHeader({ active }: { active: string }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const updateScrollState = () => {
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      setIsScrolled(window.scrollY > 24);
+      setScrollProgress(maxScroll > 0 ? (window.scrollY / maxScroll) * 100 : 0);
+    };
+
+    updateScrollState();
+    window.addEventListener("scroll", updateScrollState, { passive: true });
+    return () => window.removeEventListener("scroll", updateScrollState);
+  }, []);
+
+  const headerClassName = ["header", "page-header", menuOpen && "menu-active", isScrolled && "header-scrolled"]
+    .filter(Boolean)
+    .join(" ");
 
   return (
-    <header className={menuOpen ? "header page-header menu-active" : "header page-header"}>
+    <header className={headerClassName} style={{ "--scroll-progress": `${scrollProgress}%` } as CSSProperties}>
       <Link className="brand" href="/" aria-label="MJ Travels home" onClick={() => setMenuOpen(false)}>
         <img src="/logo.png" alt="MJ Travels" className="logo-img" />
       </Link>

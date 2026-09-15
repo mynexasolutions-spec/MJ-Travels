@@ -37,7 +37,7 @@ h1 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp
 .airport-grid { display: grid; grid-template-columns: .96fr 1.04fr; align-items: center; gap: 58px; }
 .airport-copy { position: relative; padding: 9px 0 0 3px; min-height: 420px; }.airport-copy h2, .why-copy h2 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(42px, 4.05vw, 62px); line-height: .91; letter-spacing: -2.5px; }.cab-service { margin: 10px 0 18px; color: #29343b; font-size: 23px; font-weight: 500; }.airport-description { font-size: 15px; line-height: 1.48; font-weight: 600; color: #273138; margin: 0 0 22px; }.airport-copy ul { list-style: none; padding: 0; margin: 0 0 19px; display: grid; gap: 11px; font-size: 15px; font-weight: 700; }.airport-copy li { display: flex; gap: 12px; align-items: center; }.airport-copy li::before { content: "✓"; color: #fff; background: #0a2023; width: 18px; height: 18px; display: inline-grid; place-items: center; border-radius: 50%; font-size: 11px; }
 .airport-book { width: 176px; height: 46px; display: inline-flex; align-items: center; justify-content: center; gap: 0; padding: 0 14px; text-align: center; background: #062427; border-radius: 13px; color: #f7d766; font-size: 15px; font-weight: 800; box-shadow: 0 6px 12px rgba(2, 25, 27, .16); }.airport-book svg { width: 19px; }.journey-note { position: absolute; left: min(84%, 375px); bottom: 13px; width: 170px; margin: 0; font-family: "Brush Script MT", "Segoe Script", cursive; font-size: 39px; line-height: .8; transform: rotate(-9deg); color: #262b2d; text-align: center; }.journey-note::after { content: ""; display: block; width: 117px; height: 2px; background: #17262a; margin: 12px 0 0 25px; transform: rotate(-5deg); }
-.airport-photo { width: 100%; aspect-ratio: 1.37; border-radius: 20px; background: url("/images/1.jpg") center/cover no-repeat; box-shadow: 0 4px 15px rgba(10,25,29,.08); }
+.airport-photo { width: 100%; aspect-ratio: 1.37; border-radius: 20px; background: url("/cab service.jpeg") center/contain no-repeat; background-color: #102729; box-shadow: 0 4px 15px rgba(10,25,29,.08); }
 .why-row { margin-top: clamp(38px, 5vw, 78px); display: flex; gap: 70px; align-items: center; }.why-copy { flex: 0 0 275px; }.why-copy h2 { font-size: 39px; letter-spacing: -1.7px; }.why-copy p { font-size: 12px; font-weight: 600; color: #555a5b; margin: 11px 0 0; white-space: nowrap; }.trust-features { display: grid; grid-template-columns: repeat(6, 1fr); flex: 1; gap: 20px; }.trust-feature { display: grid; justify-items: center; align-content: start; text-align: center; gap: 9px; }.trust-feature > span { width: 66px; height: 66px; display: grid; place-items: center; border-radius: 50%; background: #f2f1eb; }.trust-feature svg { width: 31px; height: 31px; stroke-width: 2.1; }.trust-feature p { margin: 0; font-size: 12px; font-weight: 700; line-height: 1.18; }
 .fleet-section { padding: 0; background: #f8f8f3; color: #061a1b; }
 .fleet-shell { position: relative; isolation: isolate; overflow: hidden; width: 100%; margin: 0; padding: clamp(28px, 3.5vw, 45px) clamp(42px, 4vw, 66px) clamp(31px, 3vw, 42px); border-radius: 0; background: linear-gradient(180deg, #022f2c 0%, #002924 45%, #001d1c 100%); }
@@ -1565,6 +1565,23 @@ a, button, input { -webkit-tap-highlight-color: transparent; }
 
 .header::before { background: radial-gradient(circle at 76% -35%, rgba(64, 176, 158, .28), transparent 38%); }
 .header .brand { filter: drop-shadow(0 3px 10px rgba(0, 0, 0, .34)); }
+.header {
+  transition: height .3s ease, background .3s ease, border-color .3s ease, box-shadow .3s ease, transform .3s ease;
+}
+.header-scrolled {
+  height: 66px;
+  background: rgba(2, 17, 19, .985);
+  border-color: rgba(243, 201, 89, .48);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .32);
+}
+.header-scrolled .brand { transform: translateY(1px) scale(.93); }
+.header-scrolled .nav a { transform: translateY(-1px); }
+.header-scrolled .header-book,
+.header-scrolled .top-call { transform: scale(.94); }
+.header .brand,
+.header .nav a,
+.header .header-book,
+.header .top-call { transition: transform .3s ease, color .24s ease, background .24s ease, box-shadow .24s ease; }
 .nav a { color: rgba(255, 255, 255, .8); font-size: 14px; font-weight: 700; letter-spacing: .1px; }
 .nav a::after { height: 1px; background: var(--premium-gold); box-shadow: none; }
 .nav a:hover, .nav a.active { color: #fff3ca; }
@@ -1595,6 +1612,7 @@ a, button, input { -webkit-tap-highlight-color: transparent; }
 .content { padding-top: clamp(54px, 8vh, 108px); }
 .eyebrow, .page-kicker { color: var(--premium-gold); letter-spacing: 2.4px; }
 h1 { letter-spacing: -2.2px; }
+.hero h1 { color: #ffffff; }
 .description { max-width: 620px; color: rgba(255, 255, 255, .82); line-height: 1.55; font-weight: 500; }
 .benefits > div { padding: 7px 10px 7px 0; }
 .icon-circle { border: 0; border-radius: 0; }
@@ -1709,8 +1727,10 @@ h1 { letter-spacing: -2.2px; }
 
 @media (max-width: 760px) {
   .header, .header.page-header { height: 72px; background: rgba(3, 23, 25, .98); }
+  .header.header-scrolled, .header.page-header.header-scrolled { height: 62px; }
   .header::before { background: radial-gradient(circle at 85% 0%, rgba(64, 176, 158, .16), transparent 44%); }
   .header .brand { transform: translateY(2px); }
+  .header.header-scrolled .brand { transform: translateY(1px) scale(.92); }
   .menu-button { border-color: rgba(243, 201, 89, .38); background: rgba(255, 255, 255, .09); }
   .nav, .nav.nav-open { background: linear-gradient(160deg, #062426, #031416 72%); }
   .drawer-heading { border-bottom-color: rgba(243, 201, 89, .34); }
@@ -1745,4 +1765,46 @@ h1 { letter-spacing: -2.2px; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+}
+
+/* Scroll indicator: the navbar keeps its full height while this line tracks page progress. */
+.header.header-scrolled,
+.header.page-header.header-scrolled { height: 78px; }
+.header.header-scrolled .brand { transform: none; }
+.header-scrolled .nav a,
+.header-scrolled .header-book,
+.header-scrolled .top-call { transform: none; }
+.header::after {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 3;
+  inset: auto auto -1px 0;
+  width: var(--scroll-progress, 0%);
+  height: 2px;
+  border-radius: 0 999px 999px 0;
+  background: linear-gradient(90deg, #f3c959, #fff0ad);
+  box-shadow: 0 1px 8px rgba(243, 201, 89, .7);
+  pointer-events: none;
+  transition: width .12s linear;
+}
+
+/* Remove exposed image-edge lines while preserving the airport composition. */
+.airport-photo {
+  background-size: cover;
+  background-position: center 54%;
+}
+
+@media (max-width: 760px) {
+  .header.header-scrolled,
+  .header.page-header.header-scrolled { height: 72px; }
+  .header.header-scrolled .brand { transform: translateY(2px); }
+  .airport-photo {
+    aspect-ratio: 1477 / 1065;
+    background-size: 104% auto;
+    background-position: 62% center;
+    background-color: #102729;
+  }
+  .route-card { height: auto; aspect-ratio: 1; background: #102729; }
+  .route-image-wrap img { object-fit: contain; }
 }
