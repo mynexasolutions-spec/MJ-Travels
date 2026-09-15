@@ -201,9 +201,9 @@ export default function Home() {
         <p className="description">Pune to Mumbai Airport and beyond — Safe, Reliable<br className="desktop-break" /> and Comfortable Rides with MJ Travels.</p>
 
         <div className="benefits">
-          <div><span className="icon-circle"><ClockIcon /></span><p>On-Time<br />Pickup</p></div>
-          <div><span className="icon-circle"><DriverIcon /></span><p>Professional<br />Drivers</p></div>
-          <div><span className="icon-circle"><CarIcon /></span><p>Clean &amp;<br />Comfortable Cars</p></div>
+          <div><span className="icon-circle"><img className="hero-benefit-icon" src="/back-in-time.png" alt="" /></span><p>On-Time<br />Pickup</p></div>
+          <div><span className="icon-circle"><img className="hero-benefit-icon" src="/avatar.png" alt="" /></span><p>Professional<br />Drivers</p></div>
+          <div><span className="icon-circle"><img className="hero-benefit-icon" src="/electric-car.png" alt="" /></span><p>Clean &amp;<br />Comfortable Cars</p></div>
         </div>
 
         <div className="actions">
@@ -473,6 +473,7 @@ export default function Home() {
               <a className="footer-call-link" href="tel:8888184051" aria-label="Call MJ Travels"><img src="/icons/phone-call.png" alt="" /></a>
               <a href="https://wa.me/918888184051" target="_blank" rel="noreferrer" aria-label="WhatsApp MJ Travels"><img src="/icons/whatsapp.png" alt="" /></a>
               <a href="https://www.instagram.com/mjtravels.1?stkn=MWd1M3NwdGEyN3lwZA%3D%3D&utm_source=qr" target="_blank" rel="noreferrer" aria-label="Instagram"><img src="/icons/instagram.png" alt="" /></a>
+              <a className="footer-mobile-logo" href="#home" aria-label="MJ Travels home"><img src="/logo.png" alt="MJ Travels" /></a>
             </div>
           </div>
         </div>

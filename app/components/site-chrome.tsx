@@ -83,7 +83,7 @@ export function SiteFooter() {
           <a className="brand footer-brand" href="/" aria-label="MJ Travels home">
             <img src="/logo.png" alt="MJ Travels" className="logo-img" />
           </a>
-          <p>Safe rides. Happy journeys. Always with you.</p>
+          <p>Safe Rides. Happy Journeys. Always With You.</p>
         </div>
         <div className="footer-column">
           <h2>Quick Links</h2>
@@ -99,6 +99,7 @@ export function SiteFooter() {
             <a className="footer-call-link" href="tel:8888184051" aria-label="Call MJ Travels"><img src="/icons/phone-call.png" alt="" /></a>
             <a href="https://wa.me/918888184051" target="_blank" rel="noreferrer" aria-label="WhatsApp MJ Travels"><img src="/icons/whatsapp.png" alt="" /></a>
             <a href="https://www.instagram.com/mjtravels.1" target="_blank" rel="noreferrer" aria-label="Instagram"><img src="/icons/instagram.png" alt="" /></a>
+            <a className="footer-mobile-logo" href="/" aria-label="MJ Travels home"><img src="/logo.png" alt="MJ Travels" /></a>
           </div>
         </div>
       </div>

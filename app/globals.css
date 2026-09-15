@@ -1794,11 +1794,68 @@ h1 { letter-spacing: -2.2px; }
   background-size: cover;
   background-position: center 54%;
 }
+.hero-benefit-icon { width: 32px; height: 32px; display: block; object-fit: contain; filter: brightness(0) invert(1); }
+.footer-mobile-logo { display: none !important; }
+
+@media (min-width: 761px) {
+  .footer-brand { transform: translateX(28px); }
+
+  .contact-actions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+}
+
+/* Location and contact actions */
+.directions-button,
+.contact-actions a {
+  min-height: 52px;
+  height: 52px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: .05px;
+  box-shadow: 0 7px 16px rgba(4, 37, 38, .13);
+  transition: transform .22s ease, box-shadow .22s ease, filter .22s ease;
+}
+.directions-button {
+  min-width: 188px;
+  background: #0a4b4b;
+  color: #fff;
+  border-color: rgba(150, 235, 213, .35);
+}
+.call-now { border-color: rgba(112, 255, 117, .5) !important; }
+.whatsapp-button { border-color: rgba(129, 255, 194, .34) !important; }
+.instagram-button { border-color: rgba(255, 255, 255, .26) !important; }
+.directions-button:hover,
+.contact-actions a:hover {
+  filter: brightness(1.06);
+  transform: translateY(-2px);
+  box-shadow: 0 11px 22px rgba(4, 37, 38, .2);
+}
+.contact-actions .action-icon { width: 23px; height: 23px; object-fit: contain; }
 
 @media (max-width: 760px) {
   .header.header-scrolled,
   .header.page-header.header-scrolled { height: 72px; }
   .header.header-scrolled .brand { transform: translateY(2px); }
+  .footer-brand-block { display: none; }
+  .footer-social .social-links {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 31px) minmax(0, 1fr);
+    gap: 14px;
+    align-items: center;
+  }
+  .social-links .footer-mobile-logo {
+    width: 150px;
+    height: 50px;
+    display: flex !important;
+    grid-column: 4;
+    justify-self: end;
+    transform: translateY(-34px);
+    border-radius: 0;
+  }
+  .social-links .footer-mobile-logo img { width: 150px; height: 50px; object-fit: contain; }
+  .hero-benefit-icon { width: 29px; height: 29px; }
   .airport-photo {
     aspect-ratio: 1477 / 1065;
     background-size: 104% auto;
