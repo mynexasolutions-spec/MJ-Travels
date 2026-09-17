@@ -30,10 +30,10 @@ const trustFeatures = [
 ];
 
 const fleet = [
-  { name: "Sedan", subtitle: "Dzire or Similar", image: "/images/your-image-0.jpg", included: "Toll Tax", fuel: "CNG", price: "₹2500" },
-  { name: "SUV", subtitle: "Ertiga or Similar", image: "/images/your-image-11.jpg", included: "Toll Tax", fuel: "Diesel", price: "₹3500" },
-  { name: "Premium SUV", subtitle: "Innova Crysta or Similar", image: "/images/your-image-12.jpg", included: "Toll Tax", fuel: "Diesel", price: "₹5000" },
-  { name: "Tempo Traveller", subtitle: "12 Seater or Similar", image: "/images/your-image-13.jpg", included: "Toll Tax", fuel: "Diesel", price: "₹10900" },
+  { name: "Sedan", subtitle: "Dzire or Similar", image: "/images/Dzire.png", included: "Toll Tax", fuel: "CNG", price: "₹2500" },
+  { name: "SUV", subtitle: "Ertiga or Similar", image: "/images/Ertiga.png", included: "Toll Tax", fuel: "Diesel", price: "₹3500" },
+  { name: "Premium SUV", subtitle: "Innova Crysta or Similar", image: "/images/Innova%20Crysta.png", included: "Toll Tax", fuel: "Diesel", price: "₹5000" },
+  { name: "Tempo Traveller", subtitle: "12 Seater or Similar", image: "/images/Tempo%20Traveller.png", included: "Toll Tax", fuel: "Diesel", price: "₹10900" },
 ];
 
 const customerReviews = [
@@ -95,11 +95,11 @@ function FleetDetailIcon({ type }: { type: "included" | "fuel" | "cancellation" 
   const icons = {
     included: <><circle cx="12" cy="12" r="8.5" /><path d="M12 7v5l3.5 2M5.5 5.5 4 4M18.5 5.5 20 4" /></>,
     toll: <><path d="M3 20h18" /><path d="M7 20V5" /><path d="M7 6 19.5 3" /><path d="M9.4 6.4 10 8.2M11.7 5.8 12.3 7.6M14 5.2 14.6 7M16.3 4.6 16.9 6.4" /></>,
-    oneway: <><rect x="3" y="7.5" width="18" height="9" rx="1.5" /><path d="M7.5 12h9M13 8.3 17 12l-4 3.7" /></>,
+    oneway: <><rect x="2.5" y="7" width="19" height="10" rx="2" /><path d="M6 12h9.5" /><path d="M12 8.3 16.5 12l-4.5 3.7" /></>,
     fuel: <><path d="M5 21V4h9v17H5Zm3-12h3M14 9h2l2 2.5V18c0 .8.7 1.5 1.5 1.5S21 18.8 21 18v-7.2L18.2 8H14" /><path d="M8 21v-5h3v5" /></>,
     cancellation: <><path d="M12 3 19 6v5c0 4.6-2.9 8-7 10-4.1-2-7-5.4-7-10V6l7-3Z" /><path d="m8.7 12 2.1 2.1 4.6-4.6" /></>,
     payment: <><circle cx="16" cy="7" r="3.5" /><path d="M16 5v4M14 7h4M4 18.5c1.8-3.7 4.2-5.5 7.2-5.5 1.9 0 2.7 1.1 4.8 1.1H19c1.1 0 1.8.8 1.8 1.7 0 1-.7 1.7-1.8 1.7h-4.2l-2.3 2.2c-1.4 1.4-3.2 1.7-5 1l-4.2-1.6" /></>,
-    exclusion: <><rect x="4" y="9" width="16" height="11" rx="2" /><path d="M8 9V6.5a4 4 0 0 1 8 0V9" /><path d="M9.5 13.5 14.5 18.5M14.5 13.5 9.5 18.5" /></>,
+    exclusion: <><circle cx="12" cy="12" r="9" /><path d="M9.3 16V8h3a2.6 2.6 0 0 1 0 5.2H9.3" /><path d="M5.5 5.5 18.5 18.5" /></>,
   };
 
   return <svg viewBox="0 0 24 24" aria-hidden="true">{icons[type]}</svg>;
