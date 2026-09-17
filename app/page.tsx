@@ -1,6 +1,6 @@
 "use client";
 
-import { type CSSProperties, type FormEvent, useEffect, useState } from "react";
+import { type CSSProperties, type FormEvent, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
 const navLinks = [
@@ -30,18 +30,10 @@ const trustFeatures = [
 ];
 
 const fleet = [
-  { name: "Sedan", subtitle: "Dzire or Similar", image: "/images/your-image-0.jpg", included: "4 hrs | 40 kms", fuel: "CNG", price: "₹1450" },
-  { name: "SUV", subtitle: "Innova or Similar", image: "/images/your-image-11.jpg", included: "8 hrs | 80 kms", fuel: "Diesel", price: "₹2250" },
-  { name: "Premium SUV", subtitle: "Premium or Similar", image: "/images/your-image-12.jpg", included: "8 hrs | 80 kms", fuel: "Diesel", price: "₹3200" },
-  { name: "Tempo Traveller", subtitle: "12 Seater or Similar", image: "/images/your-image-13.jpg", included: "8 hrs | 80 kms", fuel: "Diesel", price: "₹3800" },
-];
-
-const popularRoutes = [
-  { route: "Pune|Mumbai Airport", image: "/images/your-image-3.jpg" },
-  { route: "Pune|Lonavala", image: "/images/your-image-4.jpg" },
-  { route: "Pune|Mahabaleshwar", image: "/images/your-image-6.jpg" },
-  { route: "Pune|Shirdi", image: "/images/your-image-7.jpg" },
-  { route: "Pune|Nashik", image: "/images/your-image-8.jpg" },
+  { name: "Sedan", subtitle: "Dzire or Similar", image: "/images/your-image-0.jpg", included: "Toll Tax", fuel: "CNG", price: "₹2500" },
+  { name: "SUV", subtitle: "Ertiga or Similar", image: "/images/your-image-11.jpg", included: "Toll Tax", fuel: "Diesel", price: "₹3500" },
+  { name: "Premium SUV", subtitle: "Innova Crysta or Similar", image: "/images/your-image-12.jpg", included: "Toll Tax", fuel: "Diesel", price: "₹5000" },
+  { name: "Tempo Traveller", subtitle: "12 Seater or Similar", image: "/images/your-image-13.jpg", included: "Toll Tax", fuel: "Diesel", price: "₹10900" },
 ];
 
 const customerReviews = [
@@ -51,9 +43,20 @@ const customerReviews = [
 ];
 
 const customerStats = [
-  { value: "1000+", label: "Happy Customers", icon: "family" },
-  { value: "5000+", label: "Successful Trips", icon: "car" },
+  { value: "54,933+", label: "Happy Customers", icon: "family" },
+  { value: "92,847+", label: "Successful Trips", icon: "car" },
   { value: "4.9/5", label: "Customer Satisfaction", icon: "star" },
+];
+
+const galleryPreview = [
+  "WhatsApp Image 2026-09-09 a2t 12.23.45 PM.jpeg",
+  "WhatsApp Image 2026-09-09 at 12.23.144 PM.jpeg",
+  "WhatsApp Image 2026-09-09 at 12.23.412 PM.jpeg",
+  "WhatsApp Image 2026-09-09 at 12.23.42 PM.jpeg",
+  "WhatsApp Image 2026-09-09 at 12.23.4311 PM.jpeg",
+  "WhatsApp Image 2026-09-09 at 12.23.45 PM.jpeg",
+  "WhatsApp Image 2026-09-09 at 121.23.43 PM.jpeg",
+  "WhatsApp Image 2026-09-09 at 122.23.44 PM.jpeg",
 ];
 
 function PhoneIcon() {
@@ -88,12 +91,15 @@ function BookingIcon({ type }: { type: "location" | "calendar" | "time" }) {
   return <svg viewBox="0 0 24 24" aria-hidden="true">{paths[type]}</svg>;
 }
 
-function FleetDetailIcon({ type }: { type: "included" | "fuel" | "cancellation" | "payment" }) {
+function FleetDetailIcon({ type }: { type: "included" | "fuel" | "cancellation" | "payment" | "exclusion" | "toll" | "oneway" }) {
   const icons = {
     included: <><circle cx="12" cy="12" r="8.5" /><path d="M12 7v5l3.5 2M5.5 5.5 4 4M18.5 5.5 20 4" /></>,
+    toll: <><path d="M3 20h18" /><path d="M7 20V5" /><path d="M7 6 19.5 3" /><path d="M9.4 6.4 10 8.2M11.7 5.8 12.3 7.6M14 5.2 14.6 7M16.3 4.6 16.9 6.4" /></>,
+    oneway: <><rect x="3" y="7.5" width="18" height="9" rx="1.5" /><path d="M7.5 12h9M13 8.3 17 12l-4 3.7" /></>,
     fuel: <><path d="M5 21V4h9v17H5Zm3-12h3M14 9h2l2 2.5V18c0 .8.7 1.5 1.5 1.5S21 18.8 21 18v-7.2L18.2 8H14" /><path d="M8 21v-5h3v5" /></>,
     cancellation: <><path d="M12 3 19 6v5c0 4.6-2.9 8-7 10-4.1-2-7-5.4-7-10V6l7-3Z" /><path d="m8.7 12 2.1 2.1 4.6-4.6" /></>,
     payment: <><circle cx="16" cy="7" r="3.5" /><path d="M16 5v4M14 7h4M4 18.5c1.8-3.7 4.2-5.5 7.2-5.5 1.9 0 2.7 1.1 4.8 1.1H19c1.1 0 1.8.8 1.8 1.7 0 1-.7 1.7-1.8 1.7h-4.2l-2.3 2.2c-1.4 1.4-3.2 1.7-5 1l-4.2-1.6" /></>,
+    exclusion: <><rect x="4" y="9" width="16" height="11" rx="2" /><path d="M8 9V6.5a4 4 0 0 1 8 0V9" /><path d="M9.5 13.5 14.5 18.5M14.5 13.5 9.5 18.5" /></>,
   };
 
   return <svg viewBox="0 0 24 24" aria-hidden="true">{icons[type]}</svg>;
@@ -117,6 +123,73 @@ function ServiceGlyph({ name }: { name: string }) {
   };
 
   return <svg viewBox="0 0 24 24" aria-hidden="true">{paths[name]}</svg>;
+}
+
+function HomeGallerySlider() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const pausedRef = useRef(false);
+  const resumeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    let frameId: number;
+    const step = () => {
+      if (!pausedRef.current) {
+        const halfWidth = track.scrollWidth / 2;
+        track.scrollLeft += 0.6;
+        if (track.scrollLeft >= halfWidth) track.scrollLeft -= halfWidth;
+      }
+      frameId = requestAnimationFrame(step);
+    };
+    frameId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(frameId);
+  }, []);
+
+  const pauseThenResume = () => {
+    pausedRef.current = true;
+    if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+    resumeTimeoutRef.current = setTimeout(() => { pausedRef.current = false; }, 2600);
+  };
+
+  const scrollByCard = (direction: 1 | -1) => {
+    pauseThenResume();
+    trackRef.current?.scrollBy({ left: direction * 320, behavior: "smooth" });
+  };
+
+  return (
+    <section className="home-gallery-section" id="moments">
+      <div className="home-gallery-shell">
+        <div className="home-gallery-heading">
+          <div>
+            <h2>Travel<br />Moments</h2>
+            <p>A glimpse of comfortable rides, trusted journeys and happy travellers.</p>
+          </div>
+          <Link className="home-gallery-view-all" href="/gallery">View Full Gallery</Link>
+        </div>
+
+        <div className="home-gallery-slider">
+          <button className="gallery-nav gallery-nav-prev" type="button" aria-label="Previous photos" onClick={() => scrollByCard(-1)}>&#10094;</button>
+          <div
+            className="home-gallery-track"
+            ref={trackRef}
+            onMouseEnter={() => { pausedRef.current = true; }}
+            onMouseLeave={() => { pausedRef.current = false; }}
+            onTouchStart={() => { pausedRef.current = true; }}
+            onTouchEnd={pauseThenResume}
+          >
+            {[...galleryPreview, ...galleryPreview].map((image, index) => (
+              <div className="home-gallery-item" key={`${image}-${index}`}>
+                <img src={`/gallery/${image}`} alt="MJ Travels travel moment" loading="lazy" decoding="async" />
+              </div>
+            ))}
+          </div>
+          <button className="gallery-nav gallery-nav-next" type="button" aria-label="Next photos" onClick={() => scrollByCard(1)}>&#10095;</button>
+        </div>
+      </div>
+    </section>
+  );
 }
 
 export default function Home() {
@@ -275,10 +348,10 @@ export default function Home() {
                 <div className="fleet-card-content">
                   <div className="fleet-title"><h3>{vehicle.name}</h3><span>{vehicle.subtitle}</span></div>
                   <div className="fleet-details">
-                    <div className="fleet-detail"><img className="fleet-detail-icon" src="/time-management.png" alt="" /><p><span>Included</span><strong>{vehicle.included}</strong></p></div>
-                    <div className="fleet-detail fleet-cancellation"><FleetDetailIcon type="cancellation" /><p><span>Cancellation</span><strong>Free up to 1 hr</strong></p></div>
+                    <div className="fleet-detail"><FleetDetailIcon type="toll" /><p><span>Included</span><strong>{vehicle.included}</strong></p></div>
+                    <div className="fleet-detail fleet-cancellation"><FleetDetailIcon type="oneway" /><p><span>One Way</span><strong>Mumbai, Pune</strong></p></div>
                     <div className="fleet-detail"><img className="fleet-detail-icon" src="/gas-station.png" alt="" /><p><span>Fuel type</span><strong>{vehicle.fuel}</strong></p></div>
-                    <div className="fleet-detail"><img className="fleet-detail-icon" src="/payment-method.png" alt="" /><p><span>Part payment</span><strong>Pay 20% now</strong></p></div>
+                    <div className="fleet-detail fleet-exclusion"><FleetDetailIcon type="exclusion" /><p><span>Exclusion</span><strong>Airport parking</strong></p></div>
                   </div>
                   <div className="fleet-card-footer"><p><strong>{vehicle.price}</strong><span>+ Taxes &amp; Charges</span></p><Link className="fleet-book" href="/book">Book Now</Link></div>
                 </div>
@@ -288,26 +361,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="routes-section" id="routes">
-        <div className="routes-shell">
-          <div className="routes-intro">
-            <h2>Popular<br />Routes</h2>
-            <p>Explore top destinations<br />with MJ Travels.</p>
-          </div>
-
-          <div className="routes-grid">
-            {popularRoutes.map((route) => (
-              <a className="route-card" href="#contact" key={route.route}>
-                <div className="route-image-wrap">
-                  <img src={route.image} alt={route.route} />
-                  <h3>{route.route.split("|").map((line) => <span key={line}>{line}</span>)}</h3>
-                </div>
-              </a>
-            ))}
-          </div>
-
-        </div>
-      </section>
+      <HomeGallerySlider />
 
       <section className="reviews-section" id="reviews">
         <div className="reviews-shell">
@@ -459,7 +513,7 @@ export default function Home() {
 
           <div className="footer-column">
             <h2>Quick Links</h2>
-            <a href="/">Home</a><a href="/services">Services</a><a href="/gallery">Gallery</a><a href="/#routes">Popular Routes</a><a href="/about">About Us</a><a href="/reviews">Reviews</a><a href="/contact">Contact</a>
+            <a href="/">Home</a><a href="/services">Services</a><a href="/gallery">Gallery</a><a href="/about">About Us</a><a href="/reviews">Reviews</a><a href="/contact">Contact</a>
           </div>
 
           <div className="footer-column">
